@@ -1,17 +1,18 @@
 import React from 'react';
-import Message from '../extends/message_item';
+import Message from '../message';
+import Typing from '../typing';
 
 import './messages.scss';
 
 export default class App extends React.Component {
     render () {
         return (
-            <div className="chat_window">
-                <Top/>
-                <ul className="messages">
-                    <Message/>
-                </ul>
-            </div>
+            <ul className="messages">
+                {this.props.messages.map(item =>
+                    <Message key={item.id} user={item.userId == this.props.user? true: false} message={item.message}/>
+                )}
+                {this.props.typing ? <Typing/> : ''}
+            </ul>
         )
     }
 }
